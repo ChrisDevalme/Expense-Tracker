@@ -2,10 +2,10 @@ const User = require('../models/User')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-exports.auth = async (req, res, next) => {
+exports.authorizeUser = async (req, res, next) => {
     try {
       const token = req.header('Authorization').replace('Bearer ', '')
-      const data = jwt.verify(token, 'secret')
+      const data = jwt.verify(token, process.env.SECRET)
       const user = await User.findOne({ _id: data._id })
       if (!user) {
         throw new Error()
@@ -17,7 +17,21 @@ exports.auth = async (req, res, next) => {
     }
 }
 
-exports.createUser = async (req, res) => {
+exports.loginUser = async (req, res) => {
+    try{
+      const user = await User.findOne({ email: req.body.email })
+      if (!user || !await bcrypt.compare(req.body.password, user.password)) {
+        res.status(400).send('Invalid login credentials')
+      } else {
+        const token = await user.generateAuthToken()
+        res.json({ user, token })
+      }
+    } catch(error){
+      res.status(400).json({message: error.message})
+    }
+}
+
+exports.create = async (req, res) => {
     try{
       const user = new User(req.body)
       await user.save()
@@ -39,7 +53,7 @@ exports.show = async (req, res) => {
 
 exports.transactionIndex = async (req, res) => {
     try {
-        const foundUser = await User.findOne({ _id: req.params.userId})
+        const foundUser = await User.findOne({ _id: req.params.userId}).populate('transactions')
         res.status(200).json(foundUser.transactions)
     } catch (error) {
         res.status(400).json({message: error.message})
@@ -48,7 +62,7 @@ exports.transactionIndex = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
     try{
-      const updates = Object.keys(req.body)
+      const updates = Object.keys(req.body) // turns object you pass into an array of keys
       const user = await User.findOne({ _id: req.params.id })
       updates.forEach(update => user[update] = req.body[update])
       await user.save()

@@ -16,3 +16,5 @@ router.put('/:id', transCrtl.updateTransaction)
 
 // Deletes a transaction
 router.delete('/:id', transCrtl.deleteTransaction)
+
+module.exports = router

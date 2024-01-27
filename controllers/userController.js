@@ -37,7 +37,7 @@ exports.create = async (req, res) => {
       const user = new User(req.body)
       await user.save()
       const token = await user.generateAuthToken()
-      res.json({ user, token })
+      res.status(200).json({ user, token })
     } catch(error){
       res.status(400).json({message: error.message})
     }

@@ -4,7 +4,7 @@ const userController = require('../controllers/userController')
 const income = require('../controllers/incomeCtrl')
 const expense = require('../controllers/expenseCtrl')
 
-router.use(userController.authorizeUser)
+// router.use(userController.authorizeUser)
 
 // Lists all Transactions
 router.get('/income', income.incomeIndex) // blah.com/transactions/income

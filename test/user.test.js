@@ -5,7 +5,7 @@ const { MongoMemoryServer } = require('mongodb-memory-server') // This creates t
 const app = require('../app') // this is our api application that we made with express. This is the thing that we are giving to supertest to test
 const User = require('../models/User')
 const { default: mongoose } = require('mongoose')
-const server = app.listen(8080, () => console.log('Testing on port 8080'))
+const server = app.listen(3001, () => console.log('Testing on port 3001'))
 let mongoServer
 
 beforeAll(async () => {
@@ -23,7 +23,7 @@ afterAll(async () => {
 describe('Test suite for the /users routes on our api', () => {
     // /users
     test('It create a new user in the db', async () => {
-        const response = await request(app).post('/users').send({ name: 'Chris Devalme', email: 'cuuuhhhh@gmail.com', password: '12345'})
+        const response = await request(app).post('/user').send({ userName: 'Chris Devalme', email: 'cuuuhhhh@gmail.com', password: '12345'})
 
         expect(response.statusCode).toBe(200)
         expect(response.body.user.name).toEqual('Chris Devalme')
@@ -37,7 +37,7 @@ describe('Test suite for the /users routes on our api', () => {
         const token = await user.generateAuthToken()
     
         const response = await request(app)
-          .put(`/users/${user._id}`)
+          .put(`/user/${user._id}`)
           .set('Authorization', `Bearer ${token}`)
           .send({ name: 'Jane Doe', email: 'jane.doe@example.com' })
         
@@ -52,7 +52,7 @@ describe('Test suite for the /users routes on our api', () => {
         const token = await user.generateAuthToken()
     
         const response = await request(app)
-          .delete(`/users/${user._id}`)
+          .delete(`/user/${user._id}`)
           .set('Authorization', `Bearer ${token}`)
         
         expect(response.statusCode).toBe(200)

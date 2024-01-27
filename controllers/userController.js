@@ -2,6 +2,7 @@ const User = require('../models/User')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+
 exports.authorizeUser = async (req, res, next) => {
     try {
       const token = req.header('Authorization').replace('Bearer ', '')
@@ -81,7 +82,6 @@ exports.deleteUser = async (req, res) => {
       res.status(400).json({message: error.message})
     }
 }
-
 
 
 

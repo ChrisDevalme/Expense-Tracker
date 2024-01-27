@@ -1,11 +1,13 @@
-const Income = require('../models/Income')
+const Transaction = require('../models/Transaction')
 
 
-exports.addIncome = async (req, res) => {
-    const { title, amount, category , description , date } = req.body
-    const income = Income({ title, amount, category, category, description, date })
+exports.createIncome = async (req, res) => {
+    const { amount, category , description , date, userId } = req.body
+    const income = Transaction({ amount, category, category, description, date, userId })
+    income.type = "income"
+
     try {
-        if( !title || !amount || !description || !date || !category ) {
+        if( !amount || !description || !date || !category || userId) {
             return res.status(400).json({ messsage: 'All inputs required' })
         } 
         if( amount <= 0 || !amount === 'number' ){
@@ -19,9 +21,9 @@ exports.addIncome = async (req, res) => {
     }
 }
 
-exports.incomesIndex = async (req, res) => {
+exports.incomeIndex = async (req, res) => {
     try {
-        const incomes = await Income.find({}).sort({createdAt: -1})
+        const incomes = await Transaction.find({}).sort({createdAt: -1})
         res.status(200).json(incomes)
     } catch (error) {
         res.status(400).json({message: error.message})
@@ -30,7 +32,7 @@ exports.incomesIndex = async (req, res) => {
 
 exports.showIncome = async function show(req, res) {
     try {
-        const foundIncome = await Income.findOne({ _id: req.params.id})
+        const foundIncome = await Transaction.findOne({ _id: req.params.id})
         res.status(200).json({foundIncome})
     } catch (error) {
         res.status(400).json({ msg: error.message })
@@ -51,7 +53,7 @@ exports.updateIncome = async function updateIncome(req, res) {
 
 exports.deleteIncome = async (req, res) => {
     try{
-        await Income.findOneAndDelete({ _id: req.params.id })
+        await Transaction.findOneAndDelete({ _id: req.params.id })
         res.status(200).json({ message: 'Income deleted' })
     } catch (error) {
         res.status(400).json({message: error.message})

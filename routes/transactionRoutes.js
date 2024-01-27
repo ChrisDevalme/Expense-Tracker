@@ -1,20 +1,29 @@
 const express = require('express')
 const router = express.Router()
-const transCrtl = require('../controllers/transactionController')
+const userController = require('../controllers/userController')
+const income = require('../controllers/incomeCtrl')
+const expense = require('../controllers/expenseCtrl')
 
-// Create a transaction
-router.post('/', transCrtl.create)
+router.use(userController.authorizeUser)
 
-// List all transaction
-router.get('/', transCrtl.index)
+// Lists all Transactions
+router.get('/income', income.incomeIndex) // blah.com/transactions/income
+router.get('/expense', expense.expenseIndex)
 
-// Dispalys 1 transaction
-router.get('/:id', transCrtl.show)
+// Makes a Transaction
+router.post('/income', income.createIncome)
+router.post('/expense', expense.addExpense)
 
-// Updates a transaction 
-router.put('/:id', transCrtl.updateTransaction)
+// Shows 1 transaction
+router.get('/inocome/:id', income.showIncome)
+router.get('/expense/:id', expense.showExpense)
 
-// Deletes a transaction
-router.delete('/:id', transCrtl.deleteTransaction)
+// Updates a transaction
+router.put('/income/:id', income.updateIncome)
+router.put('/expense/:id', expense.updateExpense)
+
+// Deletes an Transaction
+router.delete('/income/:id', income.deleteIncome)
+router.delete('/expense/:id', expense.deleteExpense)
 
 module.exports = router

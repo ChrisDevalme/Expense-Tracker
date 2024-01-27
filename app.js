@@ -1,12 +1,13 @@
 const express =require('express')
 const app = express()
-const transactionRouter = require('./routes/transactionRoutes')
 const userRouter = require('./routes/userRoutes')
-const incomeRouter = require('./routes/incomeRouter')
+const transactions = require('./routes/transactionRoutes')
+
 
 app.use(express.json())
 app.use('/user', userRouter)
-app.use('/transaction', transactionRouter)
-app.use('/incomes', incomeRouter)
+app.use('/transactions', transactions)
+
+// app.use('/transaction', transactionRouter)
 
 module.exports = app

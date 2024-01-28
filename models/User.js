@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -8,7 +10,8 @@ const userSchema = new mongoose.Schema({
     password: String,
     transactions: [{ 
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Transaction'}]
+        ref: 'Transaction'
+    }]
 })
 // virtuals: put calculatins here 
 

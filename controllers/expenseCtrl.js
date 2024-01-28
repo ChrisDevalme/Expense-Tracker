@@ -1,10 +1,10 @@
 const Transaction = require('../models/Transaction')
 
 
-exports.addExpense = async (req, res) => {
+exports.createExpense = async (req, res) => {
     const { amount, category , description , date, userId } = req.body
-    const expense = Transaction({ amount, category, category, description, date, userId })
-    income.type = "expense"
+    const expense = Transaction({ amount, category, description, date, userId })
+    expense.type = "expense"
 
     try {
         if( !amount || !description || !date || !category ) {
@@ -14,7 +14,7 @@ exports.addExpense = async (req, res) => {
             return res.status(400).json({ messsage: 'Amount must be a positive number' })
         }
         await expense.save()
-        res.status(200).json({ message: 'Expense  added'})
+        res.status(200).json(expense)
         
     } catch (error) {
         res.status(400).json({message: error.message})
@@ -23,7 +23,7 @@ exports.addExpense = async (req, res) => {
 
 exports.expenseIndex = async (req, res) => {
     try {
-        const expenses = await Transaction.find({}).sort({createdAt: -1})
+        const expenses = await Transaction.find({type: 'expense'}).sort({createdAt: -1})
         res.status(200).json(expenses)
     } catch (error) {
         res.status(400).json({message: error.message})
@@ -33,7 +33,7 @@ exports.expenseIndex = async (req, res) => {
 exports.showExpense = async function show(req, res) {
     try {
         const foundexpense = await Transaction.findOne({ _id: req.params.id})
-        res.status(200).json({foundexpense})
+        res.status(200).json(foundexpense)
     } catch (error) {
         res.status(400).json({ msg: error.message })
     }
@@ -53,8 +53,8 @@ exports.updateExpense = async function updateExpense(req, res) {
 
 exports.deleteExpense = async (req, res) => {
     try{
-        await Transaction.findOneAndDelete({ _id: req.params.id })
-        res.status(200).json({ message: 'Expense deleted' })
+        const deletedTransaction = await Transaction.findOneAndDelete({ _id: req.params.id })
+        res.status(200).json({message: `Deleted ${deletedTransaction.category} expense`})
     } catch (error) {
         res.status(400).json({message: error.message})
     }

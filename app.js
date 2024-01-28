@@ -8,6 +8,5 @@ app.use(express.json())
 app.use('/user', userRoutes)
 app.use('/transactions', transactions)
 
-// app.use('/transaction', transactionRouter)
 
 module.exports = app

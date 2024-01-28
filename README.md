@@ -112,6 +112,7 @@ router.delete('/expense/:id', expense.deleteExpense)
 ```
 
 Here are examples of the data returned from the request you make:
+
 User:
 ```JSON
 {

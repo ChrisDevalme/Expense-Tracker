@@ -1,6 +1,6 @@
-const request = require('supertest') // This is the thing that lets us run our code like postman
-const { MongoMemoryServer } = require('mongodb-memory-server') // This creates the fake MongoDB databases that exists on our computer un our memory nt on atlas
-const app = require('../app') // this is our api application that we made with express. This is the thing that we are giving to supertest to test
+const request = require('supertest') 
+const { MongoMemoryServer } = require('mongodb-memory-server') 
+const app = require('../app') 
 const Transaction = require('../models/Transaction')
 const { default: mongoose } = require('mongoose')
 const server = app.listen(8080, () => console.log('Testing on port 8080'))
@@ -12,7 +12,7 @@ beforeAll(async () => {
 })
 
 afterAll(async () => {
-    await mongoose.connection.close() // shut off mongoose conection with MongoDB
+    await mongoose.connection.close() 
     mongoServer.stop()
     server.close()
 })
@@ -21,26 +21,26 @@ describe('Test suite for the /transaction routes on our api', () => {
    
     test('This creates a new income transaction in the db', async () => {
         const response = await request(app).post('/transactions/income').send({ 
-            amount: 30, category: 'gift' , description: 'birthday gift' , date: 1/12/24 , userId: "65b31c6d20500463337ec17b", type: 'income'})
-        // console.log(response.statusCode.message)
+            amount: 30, category: 'gift' , description: 'birthday gift' , date: '2024-01-12T05:00:00.000Z' , userId: "65b31c6d20500463337ec17b", type: 'income'})
+        
         expect(response.statusCode).toBe(200)
         expect(response.body.amount).toBe(30)
         expect(response.body.category).toEqual('gift')
         expect(response.body.description).toEqual('birthday gift')
-        // expect(response.body.date).toEqual(1/12/24)
+        expect(response.body.date).toBe('2024-01-12T05:00:00.000Z')
         expect(response.body.userId).toEqual('65b31c6d20500463337ec17b')
         expect(response.body.type).toEqual('income')
     })
     
     test('This creates a new expense transaction in the db', async () => {
         const response = await request(app).post('/transactions/expense').send({ 
-            amount: 1500, category: 'taxes' , description: 'property taxes' , date: 1/12/24, userId: "65b31c6d20500463337ec17b", type: 'expense'})
+            amount: 1500, category: 'taxes' , description: 'property taxes' , date: '2024-01-12T05:00:00.000Z', userId: "65b31c6d20500463337ec17b", type: 'expense'})
 
         expect(response.statusCode).toBe(200)
         expect(response.body.amount).toBe(1500)
         expect(response.body.category).toEqual('taxes')
         expect(response.body.description).toEqual('property taxes')
-        // expect(response.body.date).toBe('1/12/24') //how to test dates with jest
+        expect(response.body.date).toBe('2024-01-12T05:00:00.000Z') 
         expect(response.body.userId).toEqual('65b31c6d20500463337ec17b')
         expect(response.body.type).toEqual('expense')
     })
@@ -124,7 +124,7 @@ describe('Test suite for the /transaction routes on our api', () => {
             amount: 1500, 
             category: 'taxes' , 
             description: 'property taxes' , 
-            date: 1/12/24 , 
+            date: '2024-01-12T05:00:00.000Z' , 
             userId: "65b31c6d20500463337ec17b", 
             type: 'income'
         })
@@ -136,7 +136,7 @@ describe('Test suite for the /transaction routes on our api', () => {
         expect(response.body.amount).toBe(1500)
         expect(response.body.category).toEqual('taxes')
         expect(response.body.description).toEqual('property taxes')
-        // expect(response.body.date).toEqual(1/12/24)
+        expect(response.body.date).toBe('2024-01-12T05:00:00.000Z')
         expect(response.body.userId).toEqual("65b31c6d20500463337ec17b")
         expect(response.body.type).toEqual('income')
     })
@@ -146,7 +146,7 @@ describe('Test suite for the /transaction routes on our api', () => {
             amount: 1500, 
             category: 'taxes' , 
             description: 'property taxes' , 
-            date: 1/12/24 , 
+            date: '2024-01-12T05:00:00.000Z' , 
             userId: "65b31c6d20500463337ec17b", 
             type: 'expense'
         })
@@ -158,7 +158,7 @@ describe('Test suite for the /transaction routes on our api', () => {
         expect(response.body.amount).toBe(1500)
         expect(response.body.category).toEqual('taxes')
         expect(response.body.description).toEqual('property taxes')
-        // expect(response.body.date).toEqual(1/12/24)
+        expect(response.body.date).toBe('2024-01-12T05:00:00.000Z')
         expect(response.body.userId).toEqual("65b31c6d20500463337ec17b")
         expect(response.body.type).toEqual('expense')
     })
@@ -168,7 +168,7 @@ describe('Test suite for the /transaction routes on our api', () => {
             amount: 1500, 
             category: 'taxes' , 
             description: 'property taxes' , 
-            date: 1/12/24 , 
+            date: '2024-01-12T05:00:00.000Z' , 
             userId: "65b31c6d20500463337ec17b", 
             type: 'income'
         })
@@ -187,7 +187,7 @@ describe('Test suite for the /transaction routes on our api', () => {
             amount: 1500, 
             category: 'taxes' , 
             description: 'property taxes' , 
-            date: 1/12/24 , 
+            date: '2024-01-12T05:00:00.000Z' , 
             userId: "65b31c6d20500463337ec17b", 
             type: 'expense'
         })

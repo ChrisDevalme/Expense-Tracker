@@ -4,31 +4,31 @@ This Expense Tracker app is a developer-friendly solution for implementing finan
 
 ## Installing
 
-### 1) Start by cloning the git reposirory:
+1) Start by cloning the git reposirory:
 
 ```
 git clone git@github.com:ChrisDevalme/Expense-Tracker.git
 ```
 
-### 2) Create .env file:
+2) Create .env file:
 
 ```
 touch .env
 ```
 
-### 3) Connect MONGO_URI & SECRET inside .env file:
+3) Connect MONGO_URI & SECRET inside .env file:
 
 ```
 MONGO_URI= "......"
 SECRET= "......"
 ```
-### 4) install dependencies:
+4) install dependencies:
 
 ```
 npm i or npm install
 ```
 
-### 5) start the program:
+5) start the program:
 
 ```
 npm run dev
@@ -133,6 +133,3 @@ Transaction:
 ## Models Wireframe
 
 <img src="/imports/expense-tracker(EMD).png "/>
-
-// example of a user & transaction "json"
-// get more detailed in description

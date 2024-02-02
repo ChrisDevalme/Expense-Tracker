@@ -28,7 +28,7 @@ describe('Test suite for the /transaction routes on our api', () => {
         expect(response.body.category).toEqual('gift')
         expect(response.body.description).toEqual('birthday gift')
         expect(response.body.date).toBe('2024-01-12T05:00:00.000Z')
-        expect(response.body.userId).toEqual('65b31c6d20500463337ec17b')
+        expect(response.body.userId).toEqual(['65b31c6d20500463337ec17b'])
         expect(response.body.type).toEqual('income')
     })
     
@@ -41,7 +41,7 @@ describe('Test suite for the /transaction routes on our api', () => {
         expect(response.body.category).toEqual('taxes')
         expect(response.body.description).toEqual('property taxes')
         expect(response.body.date).toBe('2024-01-12T05:00:00.000Z') 
-        expect(response.body.userId).toEqual('65b31c6d20500463337ec17b')
+        expect(response.body.userId).toEqual(['65b31c6d20500463337ec17b'])
         expect(response.body.type).toEqual('expense')
     })
 
@@ -137,7 +137,7 @@ describe('Test suite for the /transaction routes on our api', () => {
         expect(response.body.category).toEqual('taxes')
         expect(response.body.description).toEqual('property taxes')
         expect(response.body.date).toBe('2024-01-12T05:00:00.000Z')
-        expect(response.body.userId).toEqual("65b31c6d20500463337ec17b")
+        expect(response.body.userId).toEqual(["65b31c6d20500463337ec17b"])
         expect(response.body.type).toEqual('income')
     })
     
@@ -159,7 +159,7 @@ describe('Test suite for the /transaction routes on our api', () => {
         expect(response.body.category).toEqual('taxes')
         expect(response.body.description).toEqual('property taxes')
         expect(response.body.date).toBe('2024-01-12T05:00:00.000Z')
-        expect(response.body.userId).toEqual("65b31c6d20500463337ec17b")
+        expect(response.body.userId).toEqual(["65b31c6d20500463337ec17b"])
         expect(response.body.type).toEqual('expense')
     })
 

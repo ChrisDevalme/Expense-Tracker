@@ -111,8 +111,11 @@ router.delete('/income/:id', income.deleteIncome)
 router.delete('/expense/:id', expense.deleteExpense)
 ```
 
-Here are examples of the data returned from the request you make:
-
+### Testing 
+Here are seed examples you can use sample inputs you can use for testing purposes: 
+```
+npm run seed
+```
 User:
 ```JSON
 {
@@ -125,6 +128,7 @@ Transaction:
 ```JSON
 {
     "amount": "15000",
+    "type": "expense",
     "category": "entertainment",
     "description": "Date Night",
     "date": "1/12/12",

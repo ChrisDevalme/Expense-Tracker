@@ -6,11 +6,11 @@ const transactionSchema = new mongoose.Schema({
     date: { type: Date, required: true },
     category: { type: String, required: true },
     description: { type: String, required: true },
-    userId: {
+    userId: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
-    }
+    }]
 }, { timestamps: true }
 )
 

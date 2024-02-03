@@ -64,10 +64,10 @@ const transactionSchema = new mongoose.Schema({
 )
 ```
 This allows for a one to many relationship letting every user have many transactions.
-The User conroller handles authorizatication and loging a user in. While the transaction conrollers have been split into 2 (expense & income) for more functionality.
+The User conroller handles loging in a user. While the transaction model tracks each income and expense transaction.
 
 
-### As for the routes /user path controllers everything User related: 
+### As for the controllers /user path controls everything User related: 
 ```javascript
 // Create a User
 router.post('/', userCrtl.create)
@@ -119,7 +119,7 @@ npm run seed
 User:
 ```JSON
 {
-    "userName": "Jame Brown",
+    "userName": "James Brown",
     "email": "jbrown@gmail.com",
     "password": "123456"
 }

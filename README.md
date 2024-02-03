@@ -1,6 +1,6 @@
 # Expense Tracker Api
 
-This Expense Tracker app is a developer-friendly solution for implementing financial tracking systems. This application focuses on manual transaction inputs and user authentication. It's designed with simplicity in mind, making it easy for developers to integrate a solid foundation for crafting intuitive financial management systems.
+This Expense Tracker api is a developer-friendly solution for implementing financial tracking systems. This application focuses on manual transaction inputs and user authentication. It's designed with simplicity in mind, making it easy for developers to integrate a solid foundation for crafting intuitive financial management systems.
 
 ## Installing
 

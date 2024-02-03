@@ -112,6 +112,9 @@ router.delete('/expense/:id', expense.deleteExpense)
 ```
 
 ### Testing 
+```
+npm run test
+```
 Here are seed examples you can use sample inputs you can use for testing purposes: 
 ```
 npm run seed
